@@ -1,0 +1,84 @@
+{
+  "theme": "Dark",
+  "archetype": "5 (Jewel & Luxury)",
+  "aesthetic": "Mysterious, cinematic, luxury, dark fantasy. Deep shadows, glowing peach/pink blossoms, metallic armor, golden hour highlights, velvet textures.",
+  "brand": "IRON & BLOSSOM",
+  "typography": {
+    "headings": {
+      "font_family": "Cormorant Garamond, serif",
+      "tailwind_classes": "font-light tracking-tighter"
+    },
+    "body": {
+      "font_family": "Manrope, sans-serif",
+      "tailwind_classes": "font-light tracking-wide leading-relaxed"
+    },
+    "accents": {
+      "font_family": "Cormorant Garamond, serif",
+      "tailwind_classes": "italic text-sm tracking-widest uppercase"
+    }
+  },
+  "color_palette": {
+    "background_primary": "#050505",
+    "background_secondary": "#0A0A0A",
+    "text_primary": "#F2EBE5",
+    "text_secondary": "#A39E98",
+    "accent_primary": "#E29578",
+    "accent_secondary": "#C89F70",
+    "border_subtle": "rgba(200, 159, 112, 0.2)",
+    "glass_background": "rgba(10, 10, 10, 0.6)"
+  },
+  "media": {
+    "hero_video": {
+      "url": "https://customer-assets.emergentagent.com/job_d9f509e9-a4f4-4b8e-83a0-867cc7ea2efd/artifacts/ih08umx5_video.mp4",
+      "description": "15s Scroll-scrubbed video. 0-5s field reveal, 5-10s push to knight, 10-15s petal on armor."
+    },
+    "visual_process_aerial": {
+      "url": "https://customer-assets.emergentagent.com/job_d9f509e9-a4f4-4b8e-83a0-867cc7ea2efd/artifacts/v5xrgcyg_zoomout.jpg",
+      "description": "Aerial knight in field. Use in Visual Process section."
+    },
+    "visual_process_close": {
+      "url": "https://customer-assets.emergentagent.com/job_d9f509e9-a4f4-4b8e-83a0-867cc7ea2efd/artifacts/lfnm8zgt_close%20zoomin.jpg",
+      "description": "Knight in flower field close up. Use in Visual Process section."
+    },
+    "visual_process_portrait": {
+      "url": "https://customer-assets.emergentagent.com/job_d9f509e9-a4f4-4b8e-83a0-867cc7ea2efd/artifacts/oz84ql7s_pitchsuke.jpeg",
+      "description": "Knight portrait with petals on armor. Use in Visual Process section."
+    }
+  },
+  "layout_and_spacing": {
+    "philosophy": "Generous Spacing Philosophy. Use large padding (p-16 to p-32) to create cinematic breathing room.",
+    "containers": "Max-width centered. Containers with borders must have internal padding (p-8).",
+    "grid": "Bento Grid Protocol Mode A (Tetris Grid) for visual process. Asymmetric overlap."
+  },
+  "sections": [
+    {
+      "name": "Hero Video Scroll",
+      "implementation": "Pin the video using position sticky or fixed in a container with height 400vh. Calculate scroll progress (0 to 1) relative to this container. Update the video.currentTime = scrollProgress * video.duration. Map scroll progress to 3 text phases synchronized to video timings: Phase 1 (0-0.33): 'The Field of Iron' (0-5s field reveal), Phase 2 (0.33-0.66): 'Forged in Blossoms' (5-10s push to knight), Phase 3 (0.66-1.0): 'Enter the World' (10-15s petal on armor) with CTA button. Use framer-motion useScroll and useTransform for the text fades."
+    },
+    {
+      "name": "The Story",
+      "implementation": "Cinematic narrative text. Heavily asymmetrical. Large serif drop-caps, generous line height. Dark background, text fading in on scroll (framer-motion whileInView)."
+    },
+    {
+      "name": "Visual Process",
+      "implementation": "Showcase creative direction using the 3 provided knight images. Use the 'Tetris' Grid (asymmetrical, overlapping images). Subtle parallax on the images. Captions like 'Frame 01 · Surrender' using the accent typography."
+    },
+    {
+      "name": "Contact",
+      "implementation": "Dummy form. Minimalist input fields with bottom border only (no full box). 'Submit' button with 1px subtle gold border and text color change on hover. Luxurious, understated layout."
+    }
+  ],
+  "interactions_and_motion": {
+    "hover": "Buttons have slow, smooth transitions. Text color changes, borders might glow slightly.",
+    "scroll": "Lenis smooth scroll is mandatory for the cinematic feel. Text blocks reveal with a slow fade-up (y: 20, opacity: 0 to 1 over 1.2s).",
+    "accessibility": "Respect prefers-reduced-motion. If enabled, auto-play the video or show a static fallback."
+  },
+  "components": {
+    "buttons": "Custom HTML/Tailwind. No standard Shadcn button. Use pure minimal structure: px-8 py-4 border border-[rgba(200,159,112,0.3)] hover:bg-[#F2EBE5] hover:text-[#050505] transition-all duration-500.",
+    "form": "Shadcn UI can be used for input structure, but deeply customize classes: bg-transparent border-b border-white/20 rounded-none focus:ring-0 focus:border-[#E29578]."
+  },
+  "testing": {
+    "requirements": "All interactive elements (buttons, inputs) MUST have data-testid attributes (e.g. data-testid='hero-cta-button', data-testid='contact-submit')."
+  },
+  "instructions_to_main_agent": "Implement a custom video scroll-scrubber using framer-motion. The container should be tall (e.g. 400vh). Stick the video and overlay text. Use the exact media URLs provided. Do not use placeholder images. Follow the strict typography (Cormorant Garamond) and dark luxury color palette. Ensure the implementation uses .js/.jsx files (not .tsx) as specified. Include data-testid attributes."
+}

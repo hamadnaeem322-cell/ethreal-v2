@@ -1,0 +1,6 @@
+/* App-level styles handled via index.css and Tailwind */
+.App {
+    background: #050505;
+    color: #f2ebe5;
+    min-height: 100vh;
+}
