@@ -1,0 +1,30 @@
+{
+  "summary": "Frontend-only smoke + interaction test of IRON & BLOSSOM dark-fantasy luxury portfolio. All requested data-testids (33+) present, all section copy correct, navigation and CTAs scroll to correct sections, scroll-driven phase opacities work (phase 2 dominant at ~50% scroll, phase 3 dominant at ~92% scroll), contact form empty/valid submissions trigger correct sonner toasts and clear fields on success, no horizontal overflow at 375px, nav links and Enter CTA correctly hidden on mobile, no JS page errors. Hero video element has both src and poster as expected (poster is the visible asset under Playwright's chromium which cannot decode the h264 mp4 — per agent-to-agent note this is expected and NOT a bug).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Hero @ 375px mobile", "issues": ["The fixed nav brand logo ('IRON & BLOSSOM') visually overlaps the hero's top-left 'EST. MMXXV' eyebrow text — both render at the same top-left coordinates. Consider hiding the 'EST. MMXXV' eyebrow on mobile (add 'hidden md:inline') or shifting it down to avoid the collision with the sticky nav brand."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional polish) Fix mobile overlap between nav brand logo and the hero's 'EST. MMXXV' eyebrow at the top-left at <768px viewports.",
+    "(Optional) Address framer-motion console warning: 'Please ensure that the container has a non-static position...' likely emitted by one of the useScroll targets (VisualProcess Frame motion.figure or HeroScroll section). Both currently have 'relative' classes, so this is benign but logs a warning on first render."
+  ],
+  "critical_code_review_comments": [
+    "HeroScroll.jsx: onLoadedMetadata and onLoadedData both bound to the same onLoadedMeta handler — onLoadedMeta can run twice and re-trigger video.play()/pause(). Consider gating with videoReady or removing the duplicate handler.",
+    "HeroScroll.jsx line 113: inline style height='420vh' on the container — fine functionally but 420vh on small mobile screens (~844px) makes the hero ~3540px tall which still works but consider clamping for very short or very tall viewports.",
+    "All section/element styling consistent with luxury tone; data-testid coverage is excellent across interactive elements.",
+    "Contact.jsx: no email-format validation beyond HTML type='email' — acceptable for a dummy form; user choice was dummy/no backend so this is intentional."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not tested per request)", "frontend": "100% of critical flows passing; 1 minor mobile design overlap"},
+  "test_credentials": "None required",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Hero video uses h264 mp4 that Playwright bundled Chromium cannot decode (MEDIA_ERR_SRC_NOT_SUPPORTED). This is expected — verify only that the <video data-testid='hero-video'> element exists with src+poster attrs, and that the poster image renders. Scroll-driven phase opacity transitions are framer-motion useScroll based (not video-time based) and work correctly under Playwright. Tested: nav scrolls (nav-story, nav-process, nav-contact, nav-enter-cta, brand-logo), hero-enter-world-cta scrolls to #contact, contact form empty/valid submit toasts, mobile responsive at 375px (no horizontal overflow, md:flex correctly hides desktop nav).",
+  "rca of the issue": "N/A — no functional bugs found."
+}
